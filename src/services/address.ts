@@ -1,5 +1,7 @@
 import type { AddressItem, AddressParams } from '@/types/address'
 import { http } from '@/utils/http'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 /**
  * 添加收货地址
@@ -57,3 +59,13 @@ export const deleteMemberAddressByIdAPI = (id: string) => {
     url: `/member/address/${id}`,
   })
 }
+
+export const useAddressStore = defineStore('address', () => {
+  const selectedAddress = ref<AddressItem>()
+
+  const changeSelectedAddress = (val: AddressItem) => {
+    selectedAddress.value = val
+  }
+
+  return { selectedAddress, changeSelectedAddress }
+})
